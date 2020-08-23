@@ -81,7 +81,7 @@ class PostResolutionFilterApplicator {
         @Override
         public boolean accepts(final MavenDependency coordinate, final List<MavenDependency> dependenciesForResolution, final List<MavenDependency> dependencyAncestors)
                 throws IllegalArgumentException {
-            if (PackagingType.POM.equals(coordinate.getPackaging())) {
+            if (PackagingType.POM.equals(coordinate.getPackaging()) && !Boolean.getBoolean("jbang-allowpom")) {
                 if (log.isLoggable(Level.FINER)) {
                     log.finer("Filtering out POM dependency resolution: " + coordinate
                             + "; its transitive dependencies will be included");
